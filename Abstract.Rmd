@@ -1,0 +1,80 @@
+---
+title: "Trends in melanoma tumour thickness in Norway, 1983--2019"
+subtitle: "Abstract for ANCR Symposium 2022"
+date: "Updated on: `r format(Sys.Date(), '%d %b, %Y')`"
+author:
+  - name: Raju Rimal
+    institute:
+      - "Oslo Centre for Biostatistics and Epidemiology, Department of Biostatistics, Institute of Basic Medical Sciences, University of Oslo, Oslo, Norway"
+    correspondence: true
+    email: raju.rimal@medisin.uio.no
+  - name: Trude E Robsahm
+    institute:
+      - "Department of Research, Cancer Registry of Norway, Oslo, Norway"
+  - name: Adele Green
+    institute:
+      - "Department of Population Health, QIMR Berghofer Medical Research Institute, Brisbane, Australia"
+      - "Cancer Research UK Manchester Institute, University of Manchester, Manchester, United Kingdom"
+  - name: Reza Ghiasvand
+    institute:
+      - "Department of Research, Cancer Registry of Norway, Oslo, Norway"
+      - "Oslo Centre for Biostatistics and Epidemiology, Oslo University Hospital, Oslo, Norway"
+  - name: Corina S Rueegg
+    institute:
+      - "Oslo Centre for Biostatistics and Epidemiology, Oslo University Hospital, Oslo, Norway"
+  - name: Assia Bassarova
+    institute:
+      - "Department of Pathology, Oslo University Hospital–Ullevål, Oslo, Norway"
+  - name: Petter Gjersvik
+    institute:
+      - "Institute of Clinical Medicine, University of Oslo, Oslo, Norway"
+  - name: Elisabete Weiderpass
+    institute:
+      - "International Agency for Research on Cancer, Lyon, France"
+  - name: Odd O Aalen
+    institute:
+      - "Oslo Centre for Biostatistics and Epidemiology, Department of Biostatistics, Institute of Basic Medical Sciences, University of Oslo, Oslo, Norway"
+  - name: Bjørn Møller
+    institute:
+      - "Department of Registration, Cancer Registry of Norway, Oslo, Norway"
+  - name: Marit B Veierød
+    institute:
+      - "Oslo Centre for Biostatistics and Epidemiology, Department of Biostatistics, Institute of Basic Medical Sciences, University of Oslo, Oslo, Norway"
+colorlinks: true
+papersize: A4
+geometry: 
+    - margin=1in
+fontfamily: libertinus
+linestretch: 1.25
+fontsize: 11pt
+header_include:
+  - \setlength{\parindent}{0pt}
+output: 
+  pdf_document:
+    number_sections: false
+    keep_tex: true
+    pandoc_args:
+      - --lua-filter=lua-filters/scholarly-metadata.lua
+      - --lua-filter=lua-filters/author-info-blocks.lua
+  officedown::rdocx_document:
+    base_format: bookdown::word_document2
+    number_sections: false
+    reference_docx: template.docx
+    pandoc_args:
+      - --lua-filter=lua-filters/scholarly-metadata.lua
+      - --lua-filter=lua-filters/author-info-blocks.lua
+---
+
+_Word count:_ 249/250
+
+# Abstract
+
+Tumour thickness at diagnosis is the most important prognostic factor for localized primary melanoma. Using thickness data (1980–2007) from the Cancer Registry of Norway and the Norwegian Melanoma Registry (2008–2019), we investigated trends in tumour thickness, overall, and in important subgroups, 1983–2019.
+
+Thickness (mm) was categorized: T1 ($\le$ 1.0), T2 (1.0-2.0), T3 (>2.0-4.0), and T4 (>4.0). Missing was imputed using multiple-imputation and the incidence rates age-standardized using the European standard population. Annual percentage change (APC) and average APC (AAPC) with 95% confidence intervals (CIs) were estimated. 
+
+Age-standardized melanoma incidence increased from 17.7 to 33.3 in women and 12.9 to 35.2 in men. Men were diagnosed with thicker melanomas than women. Largest increase was found for T1, AAPC (95% CI) 3.1 (2.7–3.5) in women and 4.5 (4.1–4.9) in men, followed by T2 (2.0 (1.6–2.5) and 2.9 (2.5–3.3), respectively) and T4 (0.9 (0.4–1.4) and 1.3 (0.9–1.7), respectively. A plateau was observed in T1 incidence in women (1990–2004) and men (1991–2003). In superficial spreading melanoma, a similar pattern was found for T1 overall. In nodular melanomas, T3 is dominating and has a fluctuating trend in women and an increasing trend that seems to stabilize in men. In T4, an increasing trend is seen in women and a fluctuating trend in men.
+
+T1 melanomas had the largest increase in incidence. An increasing trend was also observed in thicker tumours, suggesting that the rise in melanoma incidence is not only due to overdiagnosis/pathological practice. 
+
+

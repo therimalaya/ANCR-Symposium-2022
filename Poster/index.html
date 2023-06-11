@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>Trends in melanoma tumour thickness in Norway, 1983–2019</title>
+
+
+
+
+
+
+
+<!--
+Font-awesome icons ie github or twitter
+-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+
+<!--
+Google fonts api stuff
+-->
+<link href='https://fonts.googleapis.com/css?family=Special Elite' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Rasa' rel='stylesheet'>
+
+<!--
+Here are the required style attributes for css to make this poster work :)
+-->
+<style>
+@page {
+size: 841mm 1188mm;
+margin: 0;
+padding: 0;
+}
+body {
+margin: 0px;
+padding: 0px;
+width: 841mm;
+height: 1188mm;
+text-align: justify;
+font-size: 45px;
+line-height: 1.05;
+}
+/* RMarkdown Class Styles */
+/* center align leaflet map,
+from https://stackoverflow.com/questions/52112119/center-leaflet-in-a-rmarkdown-document */
+.html-widget {
+margin: auto;
+position: sticky;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+.leaflet.html-widget.html-widget-static-bound.leaflet-container.leaflet-touch.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+position: sticky;
+width: 100%;
+}
+pre.sourceCode.r, pre.sourceCode.python {
+background-color: #ffffff20;
+border: solid #008080 1mm;
+border-radius: 0.5em;
+padding: 4mm;
+margin: auto;
+margin-top: 1em;
+margin-bottom: 1em;
+/* align-items: center; */
+}
+div.sourceCode {
+background-color: transparent;
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+}
+code.sourceCode.r, code.sourceCode.python {
+background-color: transparent;
+font-size: 20pt;
+border-radius: 2mm;
+}
+code {
+font-size: 25pt;
+font-family: monospace;
+background-color: #00808024;
+color: #008080;
+padding: 1.2mm;
+line-height: 1;
+border-radius: 2mm;
+}
+caption {
+margin-bottom: 10px;
+font-size: 20pt;
+font-style: italic;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #00808020;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+  border-spacing: 0;
+  font-size: 40%;
+  border-style: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 1em;
+  padding-left: 1em;
+  line-height: 1em;
+}
+table {
+  margin: auto;
+}
+th {
+  padding-left: 5mm;
+  padding-right: 5mm;
+}
+.caption {
+font-size: 20pt;
+font-style: italic;
+padding-top: 0;
+}
+.references {
+font-size: 20px;
+line-height: 90%;
+}
+/* Create three unequal columns that floats next to each other */
+.column {
+float: left;
+padding: 0px;
+}
+.outer {
+width: 841mm;
+height: calc(1188mm *  (1 - 0.2 - 6.0e-2 - 0.01) );
+-webkit-column-count: 3; /* Chrome, Safari, Opera */
+-moz-column-count: 3; /* Firefox */
+column-count: 3;
+-webkit-column-fill: auto;
+-moz-column-fill: auto;
+column-fill: auto;
+column-gap: 0;
+padding-left: 0cm;
+padding-right: 0cm;
+/* -webkit-column-rule-width: 50%;
+-moz-column-rule-width: 50%;
+column-rule-width: 50%; */
+-webkit-column-rule-style: none;
+-moz-column-rule-style: none;
+column-rule-style: none;
+-webkit-column-rule-color: black;
+-moz-column-rule-color: black;
+column-rule-color: black;
+background-color: #ffffff;
+font-family: Rasa;
+margin-top: calc(1188mm *  0.2 );
+padding-top: 1em;
+padding-bottom: 1em;
+}
+span.citation {
+  color: #008080;
+  font-weight: bold;
+}
+a {
+text-decoration: none;
+color: #008080;
+}
+#title {
+font-size: 92pt;
+text-align: left;
+margin: 0;
+line-height: 98%;
+border-bottom: 0;
+font-weight: normal;
+background: 0;
+}
+#author {
+color:#0b4545;
+margin: 0;
+line-height: 85%;
+font-size: 1.17em;
+}
+#affiliation {
+padding-top: 0.1em;
+font-style: italic;
+font-size: 20px;
+margin: 0;
+}
+#affiliation p {
+    font-size: 1.1em;
+    margin: 0.1em 0;
+    color: #00000060;
+}
+#funding{
+  margin-top: 25px;
+  text-align: left;
+  padding-top: 0.2em;
+  font-style: italic;
+  font-size: 25px;
+  margin-top: 0.5em;
+}
+#funding strong {
+  font-style: normal;
+}
+sup {
+color: #cc0000;
+}
+.affiliation sup {
+font-size: 20px;
+}
+.author {
+text-align: left;
+}
+.author sup {
+font-size: 30px;
+}
+.author_extra {
+color: #008080;
+margin: 0;
+line-height: 85%;
+font-size: 35px;
+text-align: left;
+}
+.outer h1, h2, h3, h4, h5, h6 {
+text-align: center;
+margin: 0;
+font-weight: bold;
+}
+.section h1 {
+  text-align:center;
+  padding-bottom:5px;
+  background:
+    linear-gradient(
+      to left,
+      #ffffff 1%,
+      #ffffff 20%,
+      #0b454575 33%,
+      #0b4545 50%,
+      #0b454575 66%,
+      #ffffff 80%,
+      #ffffff 99%
+    )
+    left
+    bottom
+    #ffffff
+    no-repeat;
+  background-size:100% 5px ;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.outer h2 {
+text-align: center;
+}
+.outer p, .level2 {
+color: #000000;
+}
+.outer ol {
+padding-left: 8%;
+padding-right: 8%;
+text-align: left;
+}
+.main {
+width: 841mm;
+height: calc(1188mm * 0.2);
+position: absolute;
+background-color: #ffffff;
+color: #0b454590;
+font-family: Special Elite;
+display: grid;
+grid-template-columns: 1fr 20%;
+background:
+  linear-gradient(
+    to left,
+    #ffffff 1%,
+    #ffffff 5%,
+    #0b454575 25%,
+    #0b4545 50%,
+    #0b454575 75%,
+    #ffffff 95%,
+    #ffffff 99%
+  )
+  left
+  bottom
+  #ffffff
+  no-repeat;
+background-size: 100% 5px;
+}
+.main strong {
+color: #0b4545;
+}
+.main strong > sup {
+color: #0b4545;
+}
+.main sup {
+color: #CC000090;
+}
+#main-img-left {
+width: 10%;
+left: 0.5in;
+bottom: 0.5in;
+position: absolute;
+}
+#main-img-center {
+width: 10%;
+left: calc(841mm * 0.45);
+bottom: 0.5in;
+position: absolute;
+}
+#main-img-right {
+width: 10%;
+right: 0.5in;
+bottom: 0.5in;
+position: absolute;
+}
+#main-img-top-right {
+  width: 80%;
+}
+.main section {
+margin: 0;
+position: absolute;
+top: 10%;
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
+margin-left: 1em;
+}
+.main p {
+font-size: 92pt;
+font-family: Special Elite;
+text-align: left;
+margin-bottom: 10px;
+}
+.qr-code {
+  align-self: center;
+  text-align: center;
+}
+.fab {
+color: #00000060;
+font-size: 25px;
+}
+.twitter, i {
+color: #00000060;
+font-size: 35px;
+text-decoration: none;
+}
+a.email {
+text-decoration: none;
+color: #00000060;
+font-size: 35px;
+}
+.envelope {
+color: #00000060;
+font-size: 5px;
+text-decoration: none;
+}
+.globe {
+color: #00000060;
+font-size: 5px;
+text-decoration: none;
+}
+.globetext {
+color: #00000060;
+font-size: 35px;
+text-decoration: none;
+}
+.poster_wrap {
+width: 841mm;
+height: 1188mm;
+padding: 0cm;
+}
+.main_bottom {
+width: 841mm;
+height: calc(1188mm * 6.0e-2);
+margin-top: calc(1188mm * (1 - 6.0e-2));
+position: absolute;
+background-color: #0b4545;
+background-image: linear-gradient(#008080 10%, #0b4545);
+}
+.section {
+  padding-left: 10mm;
+  padding-right: 10mm;
+}
+.section h1:first-child {
+  margin-top: 0;
+}
+span > #tab:mytable {
+  font-weight: bold;
+}
+.orcid img {
+  width: 1.5%;
+}
+.social {
+  border-left: 5px solid #CC000090;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+.emphasis {
+  background-color: #008080;
+  color: #ffffff;
+  border: solid #0b2045 3mm;
+  margin: 1em;
+  padding-left: 0;
+  padding-right: 0;
+}
+.emphasis h1 {
+  font-weight: bold;
+  background: none;
+  background-color: #0b2045;
+  padding-bottom: 5mm;
+  padding-top: 1mm;
+  margin-top: -1mm;
+  margin-right: -1mm;
+  margin-left: -1mm;
+}
+.emphasis blockquote {
+  border: 0;
+}
+.emphasis ol {
+  padding: 0;
+  padding-left: 8%;
+  font-size: 100%;
+  font-weight: bold;
+}
+.emphasis p {
+  color: #ffffff;
+}
+</style>
+<link rel="stylesheet" href=custom.css>
+</head>
+<body>
+
+
+<div class="poster_wrap">
+
+<div class="column outer">
+
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>The incidence of cutaneous melanoma has increased in fair-skinned populations during the past decades <span class="citation">[<a href="#ref-whiteman_growing_2016" role="doc-biblioref">1</a>]</span>. Tumour thickness at diagnosis is an important prognostic factor and forms the basis for staging and tumour classification (T) <span class="citation">[<a href="#ref-gershenwald_melanoma_2017" role="doc-biblioref">2</a>]</span>.</p>
+<p><strong>Aim:</strong> Describe the trends in melanoma tumour thickness in Norway by T category, overall and in important subgroups such as sex, age, anatomic site, and histopathological subtype, over 35-year.</p>
+</div>
+<div id="data-methods" class="section level1">
+<h1>Data &amp; Methods</h1>
+<p>Data for all invasive melanoma cases diagnosed in 1983–2019 were obtained from the Cancer Registry of Norway (CRN). Tumour thickness is included in the Norwegian Melanoma Registry from 2008, and thickness for the cases diagnosed in 1983–2007 were extracted from CRN paper archives. In total 45,812 cases were included. The tumour thickness was categorized as T1 (≤1.0 mm), T2 (&gt;1.0–2.0 mm), T3 (&gt;2.0–4.0 mm), and T4 (&gt;4.0 mm).</p>
+<p>Missing thickness, anatomic site, and histopathological subtype were imputed using multiple imputations. The European standard population was used for age standardization. For each T category, annual percentage change (APC) and average annual percentage change (AAPC) with 95% confidence intervals (CIs) were obtained using segmented regression.</p>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<div id="mcboezjani" style="overflow-x:auto;overflow-y:auto;width:100%;height:100%;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mcboezjani .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #454545;
+  font-size: 70%;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mcboezjani .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mcboezjani .gt_title {
+  color: #454545;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mcboezjani .gt_subtitle {
+  color: #454545;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mcboezjani .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcboezjani .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mcboezjani .gt_col_heading {
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mcboezjani .gt_column_spanner_outer {
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mcboezjani .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mcboezjani .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mcboezjani .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mcboezjani .gt_group_heading {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mcboezjani .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mcboezjani .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mcboezjani .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mcboezjani .gt_row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mcboezjani .gt_stub {
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcboezjani .gt_stub_row_group {
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mcboezjani .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mcboezjani .gt_summary_row {
+  color: #454545;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcboezjani .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mcboezjani .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mcboezjani .gt_last_summary_row {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcboezjani .gt_grand_summary_row {
+  color: #454545;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcboezjani .gt_first_grand_summary_row {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mcboezjani .gt_striped {
+  background-color: #FCFCFC;
+}
+
+#mcboezjani .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcboezjani .gt_footnotes {
+  color: #454545;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mcboezjani .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcboezjani .gt_sourcenotes {
+  color: #454545;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mcboezjani .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcboezjani .gt_left {
+  text-align: left;
+}
+
+#mcboezjani .gt_center {
+  text-align: center;
+}
+
+#mcboezjani .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mcboezjani .gt_font_normal {
+  font-weight: normal;
+}
+
+#mcboezjani .gt_font_bold {
+  font-weight: bold;
+}
+
+#mcboezjani .gt_font_italic {
+  font-style: italic;
+}
+
+#mcboezjani .gt_super {
+  font-size: 65%;
+}
+
+#mcboezjani .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#mcboezjani .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mcboezjani .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#mcboezjani .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#mcboezjani .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="5" class="gt_heading gt_title gt_font_normal" style><strong>Table 1: Characteristics of melanoma cases<br>in Norway before 2000 and after 2008</strong></th>
+    </tr>
+    <tr>
+      <th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style><strong>(n = 45,812 for 1983–2019)</strong></th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2">
+        <span class="gt_column_spanner"><strong>Women</strong> (n=23,619)</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2">
+        <span class="gt_column_spanner"><strong>Men</strong> (n=22,193)</span>
+      </th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>1983–1999</strong><br>n=7,720</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>2008–2019</strong><br>n=11,267</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>1983–1999</strong><br>n=6,578</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>2008–2019</strong><br>n=11,465</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">Age at diagnosis, median</td>
+<td class="gt_row gt_center">56</td>
+<td class="gt_row gt_center">63</td>
+<td class="gt_row gt_center">59</td>
+<td class="gt_row gt_center">67</td></tr>
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">Tumour thickness, median</td>
+<td class="gt_row gt_center">1.0</td>
+<td class="gt_row gt_center">0.9</td>
+<td class="gt_row gt_center">1.3</td>
+<td class="gt_row gt_center">1.0</td></tr>
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">T category, n(%)</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">T1 (≤1.0 mm)</td>
+<td class="gt_row gt_center">3,037.0(53)</td>
+<td class="gt_row gt_center">6,101.0(58)</td>
+<td class="gt_row gt_center">2,150.0(44)</td>
+<td class="gt_row gt_center">5,266.0(50)</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">T2 (>1.0–2.0 mm)</td>
+<td class="gt_row gt_center">1,290.0(23)</td>
+<td class="gt_row gt_center">2,223.0(21)</td>
+<td class="gt_row gt_center">1,113.0(23)</td>
+<td class="gt_row gt_center">2,266.0(22)</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">T3 (>2.0–4.0 mm)</td>
+<td class="gt_row gt_center">860.0(15)</td>
+<td class="gt_row gt_center">1,222.0(12)</td>
+<td class="gt_row gt_center">916.0(19)</td>
+<td class="gt_row gt_center">1,650.0(16)</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">T4 (>4.0 mm)</td>
+<td class="gt_row gt_center">498.0(9)</td>
+<td class="gt_row gt_center">967.0(9)</td>
+<td class="gt_row gt_center">676.0(14)</td>
+<td class="gt_row gt_center">1,287.0(12)</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Unspecified</td>
+<td class="gt_row gt_center">2,035</td>
+<td class="gt_row gt_center">754</td>
+<td class="gt_row gt_center">1,723</td>
+<td class="gt_row gt_center">996</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="5">% does not include the unspecified cases</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+<p>In both men and women, the median age at diagnosis increased while the median tumour thickness decreased from 1983–1999 to 2008–2019 (Table 1). In 1983–2019, the age-standardized incidence rate of melanoma increased from 17.7 to 33.3 in women and from 12.9 to 35.2 in men.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:AdjRate-BySexTstage"></span>
+<img src="index_files/figure-html/AdjRate-BySexTstage-1.svg" alt="Age-adjusted melanoma incidence rate in Norway, 1983—2019 by sex and T category. Transparent curves represent the complete case analysis and the opaque curves the imputed data." width="100%" />
+<p class="caption">
+Figure 1: Age-adjusted melanoma incidence rate in Norway, 1983—2019 by sex and T category. Transparent curves represent the complete case analysis and the opaque curves the imputed data.
+</p>
+</div>
+<p>Melanomas in the T1 category had the largest increase in incidence and a plateau was found for both sexes (Figure 1). The APCs (95% CIs) showed an increase in T1 melanomas until 1989 (6.4, 3.1–9.9) followed by a plateau (-0.0, -1.0–1.0) and a subsequent increase in 2005–2019 (5.0, 3.9–6.1). A similar trend was found in men with APC (95% CI) of (10.1, 7.5–12.7) in 1983–1990, (-1.0, -2.4–0.3) in 1991–2003 and (6.3, 5.1–7.5) in 2004–2019. No plateau was seen for the other T categories.</p>
+<div id="zgzvammrpy" style="overflow-x:auto;overflow-y:auto;width:100%;height:100%;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#zgzvammrpy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #454545;
+  font-size: 70%;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_title {
+  color: #454545;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zgzvammrpy .gt_subtitle {
+  color: #454545;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zgzvammrpy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_col_heading {
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zgzvammrpy .gt_column_spanner_outer {
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zgzvammrpy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zgzvammrpy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zgzvammrpy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zgzvammrpy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zgzvammrpy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zgzvammrpy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zgzvammrpy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zgzvammrpy .gt_row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zgzvammrpy .gt_stub {
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zgzvammrpy .gt_stub_row_group {
+  color: #454545;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zgzvammrpy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zgzvammrpy .gt_summary_row {
+  color: #454545;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zgzvammrpy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zgzvammrpy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_grand_summary_row {
+  color: #454545;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zgzvammrpy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_striped {
+  background-color: #FCFCFC;
+}
+
+#zgzvammrpy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_footnotes {
+  color: #454545;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zgzvammrpy .gt_sourcenotes {
+  color: #454545;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zgzvammrpy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zgzvammrpy .gt_left {
+  text-align: left;
+}
+
+#zgzvammrpy .gt_center {
+  text-align: center;
+}
+
+#zgzvammrpy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zgzvammrpy .gt_font_normal {
+  font-weight: normal;
+}
+
+#zgzvammrpy .gt_font_bold {
+  font-weight: bold;
+}
+
+#zgzvammrpy .gt_font_italic {
+  font-style: italic;
+}
+
+#zgzvammrpy .gt_super {
+  font-size: 65%;
+}
+
+#zgzvammrpy .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#zgzvammrpy .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#zgzvammrpy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zgzvammrpy .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#zgzvammrpy .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#zgzvammrpy .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal" style><strong>Table 2: Average annual percentage change in <br>age-adjusted melanoma incidence rate</strong></th>
+    </tr>
+    <tr>
+      <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style><strong>By sex and T category, 1983–2019</strong></th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">T category</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Women (n = 23619)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Men (n = 22193)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right gt_stub">T1 (≤1.0 mm) (n = 22733)</td>
+<td class="gt_row gt_center">3.1 (2.7, 3.5)</td>
+<td class="gt_row gt_center">4.5 (4.1, 4.9)</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">T2 (&gt;1.0–2.0 mm) (n = 8409)</td>
+<td class="gt_row gt_center">2.0 (1.6, 2.5)</td>
+<td class="gt_row gt_center">2.9 (2.5, 3.3)</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">T3 (&gt;2.0–4.0 mm) (n = 8964)</td>
+<td class="gt_row gt_center">-0.1 (-0.5, 0.3)</td>
+<td class="gt_row gt_center">1.3 (0.8, 1.8)</td></tr>
+    <tr><td class="gt_row gt_right gt_stub">T4 (&gt;4.0 mm) (n = 5706)</td>
+<td class="gt_row gt_center">0.9 (0.4, 1.4)</td>
+<td class="gt_row gt_center">1.3 (0.9, 1.7)</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p>T2 melanomas increased over the whole period: AAPC (95% CI) was 2.0 (1.6–2.5) in women and 2.9 (2.5–3.3) in men (Table 2). The incidence of T3 melanomas was stable in women and slightly increased in men. T4 melanomas also slightly increased in both sexes.</p>
+<p>In T1 melanomas, the highest incidence was found for the trunk in both sexes, followed by the lower limbs in women. A plateau was found during the 1990s–2000 for all sites in men and the trunk and lower limb in women.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:AdjRate-BySexTstageType"></span>
+<img src="index_files/figure-html/AdjRate-BySexTstageType-1.svg" alt="Age-adjusted melanoma incidence rate in Norway, 1983—2019 by sex, T category and histopathological sub-type. Transparent curves represent the complete case analysis and the opaque curves the imputed data." width="100%" />
+<p class="caption">
+Figure 2: Age-adjusted melanoma incidence rate in Norway, 1983—2019 by sex, T category and histopathological sub-type. Transparent curves represent the complete case analysis and the opaque curves the imputed data.
+</p>
+</div>
+<p>In superficial spreading melanomas, T1 melanomas showed a similar pattern as for T1 overall, but T2 melanomas showed an increasing trend in both sexes (Figure 2). For nodular melanomas, thicker tumours, particularly T3 melanomas, were dominating over the whole period (Figure 2).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:LexisPlot"></span>
+<img src="index_files/figure-html/LexisPlot-1.svg" alt="Age-specific melanoma incidence rate by age at diagnosis and period in Norway, 1983–2019 by T category" width="100%" />
+<p class="caption">
+Figure 3: Age-specific melanoma incidence rate by age at diagnosis and period in Norway, 1983–2019 by T category
+</p>
+</div>
+<p>The difference in incidence rates between the youngest and oldest age-groups was larger in thicker melanomas as compared to thinner melanomas. The highest incidence rates of T1 melanomas occurred around the ages 60–80 while for T3 and T4 melanomas the highest incidence rates were seen among the oldest (80+) (Figure 3).</p>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<ul>
+<li><p>Distinct increase in T1 melanoma incidence found before and after a plateau may indicate the increasing awareness. Increasing trend found in thicker tumours (T2–T4), in overall, suggest a melanoma epidemic in Norway.</p></li>
+<li><p>Higher incidence of thicker melanomas in men and increasing incidence of thicker melanomas in women demands for intervention through risk stratification.</p></li>
+<li><p>Further studies are required to understand the reasons for the plateau in the incidence rate.</p></li>
+</ul>
+<p><strong>Funding:</strong> This project is funded by the Norwegian Research Council (project no. 302048) and UNIFOR-FRIMED (2019).</p>
+</div>
+<div id="reference" class="section level1 unnumbered">
+<h1>Reference</h1>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-whiteman_growing_2016" class="csl-entry">
+<div class="csl-left-margin">1 </div><div class="csl-right-inline">Whiteman DC, Green AC, Olsen CM. The <span>Growing Burden</span> of <span>Invasive Melanoma</span>: <span>Projections</span> of <span>Incidence Rates</span> and <span>Numbers</span> of <span>New Cases</span> in <span>Six Susceptible Populations</span> through 2031. <em>The Journal of Investigative Dermatology</em> 2016;<strong>136</strong>:1161–71. doi:<a href="https://doi.org/10.1016/j.jid.2016.01.035">10.1016/j.jid.2016.01.035</a></div>
+</div>
+<div id="ref-gershenwald_melanoma_2017" class="csl-entry">
+<div class="csl-left-margin">2 </div><div class="csl-right-inline">Gershenwald JE, Scolyer RA, Hess KR, <em>et al.</em> Melanoma of the skin. In: MB A, ed. <em><span>AJCC</span> cancer staging manual</em>. <span>Chicago</span>: : <span>Springer</span> 2017. 563–85.</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="main">
+<!--<p></p>-->
+<div class="section">
+<h1 id="title"><p><strong>Trends in melanoma tumour thickness in Norway, 1983–2019</strong></p></h1><br>
+<h3 id="author" class="author">
+
+<strong>Raju Rimal</strong><sup> 1, <a class="orcid" href="https://orcid.org/0000-0002-1099-3857"><img src="https://raw.githubusercontent.com/brentthorne/posterdown/master/images/orcid.jpg"></a></sup>
+<!--<br>-->
+<a class="twitter social" href="https://mobile.twitter.com/mathatistics"><i class="fab fa-twitter"></i>&nbsp;&nbsp;@mathatistics</a>
+<!--<br>-->
+
+<a class='envelope'><i class="fas fa-envelope social"></i></a> <a href="mailto:raju.rimal@medisin.uio.no" class="email">raju.rimal@medisin.uio.no</a> 
+<!--<br>-->
+           </h3>
+<h5 id="author_extra", class="author_extra">
+ Raju Rimal
+<sup>1</sup>
+ Trude E Robsahm
+<sup>2</sup>
+ Adele Green
+<sup>3, 4</sup>
+ Reza Ghiasvand
+<sup>2, 5</sup>
+ Corina S Rueegg
+<sup>5</sup>
+ Assia Bassarova
+<sup>6</sup>
+ Petter Gjersvik
+<sup>7</sup>
+ Elisabete Weiderpass
+<sup>8</sup>
+ Odd O Aalen
+<sup>1</sup>
+ Bjørn Møller
+<sup>9</sup>
+ Marit B Veierød
+<sup>1</sup>
+</h5>
+
+
+<div id="affiliation" class="affiliation">
+<p><sup>1</sup> Oslo Centre for Biostatistics and Epidemiology, Department of Biostatistics, University of Oslo, Norway</p> <p><sup>2</sup> Department of Research, Cancer Registry of Norway, Oslo, Norway</p> <p><sup>3</sup> Department of Population Health, QIMR Berghofer Medical Research Institute, Brisbane, Australia</p> <p><sup>4</sup> Cancer Research UK Manchester Institute, University of Manchester, Manchester, United Kingdom</p> <p><sup>5</sup> Oslo Centre for Biostatistics and Epidemiology, Oslo University Hospital, Oslo, Norway</p> <p><sup>6</sup> Department of Pathology, Oslo University Hospital – Ullevål, Oslo, Norway</p> <p><sup>7</sup> Institute of Clinical Medicine, University of Oslo, Oslo, Norway</p> <p><sup>8</sup> International Agency for Research on Cancer, Lyon, France</p> <p><sup>9</sup> Department of Registration, Cancer Registry of Norway, Oslo, Norway
+</div>
+
+
+</div>
+<div class="qr-code">
+  <img id="main-img-top-right" src=uio-seal-cropped.svg>
+</div>
+</div>
+<div class="main_bottom">
+<img id="main-img-left" src=uio-logo-cropped.svg>
+<img id="main-img-center" src=>
+<img id="main-img-right" src=nfr-logo.svg>
+</div>
+</div>
+
+
+
+</body>
+</html>

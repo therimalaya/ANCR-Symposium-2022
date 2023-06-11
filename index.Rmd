@@ -1,0 +1,122 @@
+---
+title: Long-term Trend on Tumour Thickness of Melanoma in Norway
+subtitle: A nation-wide study, 1980-2019
+author: Raju Rimal
+institute: Oslo Center for Biostatistics and Epidemiology
+date: 04 November, 2021
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, uol-fonts, style.css]
+    lib_dir: libs
+    nature:
+      ratio: "16:10"
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+class: clear 
+background-image: url(images/Melanoma-Cell.png)
+background-position: left
+background-size: contain
+background-position: -15% 0%
+
+```{r xaringan-animate-css, echo=FALSE}
+xaringanExtra::use_animate_css()
+autoload("%>%", "magrittr")
+```
+
+
+.pull-left[].pull-right[
+
+## Melanoma
+
++ Serious form of skin cancer
+
++ Pigmentation and UV radiation exposure are the most important risk factors.
+
++ It can be cured if caught and treated early but if left untreated, it may spread to other parts and can be fatal.
+
++ Melanoma has increased dramatically in fair skinned population worldwide.
+
+]
+
+---
+class: clear, middle, center
+background-image: url("images/WpvteD.jpg")
+background-position: 5% 50%
+background-size: auto 80%
+
+.pull-left[]
+.huge.pull-right[
+Norway is<br>
+.primary[5th in incidence]<br>
+and<br>
+.primary[2nd in mortality]<br>
+worldwide
+]
+
+---
+
+# Tumour thickness and T category
+
+.grid.grid-col.tstage[
+
+![](images/T-category.png)
+
+```{r, echo = FALSE}
+t_stage <- data.table::data.table(
+  `T category` = c("(Tsu)", paste0("T", 1:4)),
+  Thickness = c(
+    "In situ",
+    "up to 1mm",
+    "from 1mm up to 2mm",
+    "from 2mm up to 4mm",
+    "more than 4mm"
+  )
+)
+t_stage %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_paper()
+```
+
+]
+
+---
+
+# Aim of the study
+
+---
+
+# Melanoma in Norway
+
+---
+
+# Characteristics of Norwegian melanoma cases
+
+---
+
+# Age-adjusted incidence rate
+
+## By T category and sex
+
+## By T category, anatomic site and sex
+
+---
+
+# Age-period-cohort plot
+
+## By T category
+
+---
+
+# Priliminary conclusions
+
+---
+
+# Acknowledgement
+
+---
+
+# References
+
+
+

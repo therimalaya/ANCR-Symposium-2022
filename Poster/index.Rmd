@@ -1,0 +1,261 @@
+---
+main_topsize: 0.2 #percent coverage of the poster
+main_bottomsize: 0.06
+main_textsize: "92pt"
+title_textsize: "92pt"
+poster_height: '1188mm'
+poster_width: '841mm'
+affiliation_textsize: '20px'
+# primary_colour: "#B60000"
+# main_textcol: "#B60000"
+# affiliation_textcol: "#261B00"
+# secondary_colour: "#0090AD"
+title: '**Trends in melanoma tumour thickness in Norway, 1983–2019**'
+author:
+  - name: '**Raju Rimal**'
+    affil: 1
+    main: true
+    orcid: '0000-0002-1099-3857'
+    twitter: mathatistics
+    email: raju.rimal@medisin.uio.no
+  - name: Raju Rimal
+    affil: 1
+  - name: Trude E Robsahm
+    affil: 2
+  - name: Adele Green
+    affil: [3, 4]
+  - name: Reza Ghiasvand
+    affil: [2, 5]
+  - name: Corina S Rueegg
+    affil: 5
+  - name: Assia Bassarova
+    affil: 6
+  - name: Petter Gjersvik
+    affil: 7
+  - name: Elisabete Weiderpass
+    affil: 8
+  - name: Odd O Aalen
+    affil: 1
+  - name: Bjørn Møller
+    affil: 9
+  - name: Marit B Veierød
+    affil: 1
+affiliation:
+  - num: 1
+    address: Oslo Centre for Biostatistics and Epidemiology, Department of Biostatistics, University of Oslo, Norway
+  - num: 2
+    address: Department of Research, Cancer Registry of Norway, Oslo, Norway
+  - num: 3
+    address: Department of Population Health, QIMR Berghofer Medical Research Institute, Brisbane, Australia
+  - num: 4
+    address: Cancer Research UK Manchester Institute, University of Manchester, Manchester, United Kingdom
+  - num: 5
+    address: Oslo Centre for Biostatistics and Epidemiology, Oslo University Hospital, Oslo, Norway
+  - num: 6
+    address: Department of Pathology, Oslo University Hospital – Ullevål, Oslo, Norway
+  - num: 7
+    address: Institute of Clinical Medicine, University of Oslo, Oslo, Norway
+  - num: 8
+    address: International Agency for Research on Cancer, Lyon, France
+  - num: 9
+    address: Department of Registration, Cancer Registry of Norway, Oslo, Norway
+logoleft_name: uio-logo-cropped.svg
+logoright_name: nfr-logo.svg
+logo_top_right: uio-seal-cropped.svg
+custom_css: custom.css
+column_numbers: 3
+output: 
+  posterdown::posterdown_betterport:
+    template: template.html
+    self_contained: false
+    pandoc_args: --mathjax
+    number_sections: false
+knit: pagedown::chrome_print
+bibliography: references.bib
+citation-style: bmj.csl
+link-citations: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+BASE_PATH <- ifelse(
+  Sys.getenv("ANALYSIS_ROOT") != "",
+  Sys.getenv("ANALYSIS_ROOT"),
+  dirname(file.path(getwd(), ".Rprofile"))
+)
+knitr::opts_chunk$set(
+  results = "asis",
+  echo = FALSE,
+  warning = FALSE,
+  tidy = FALSE,
+  message = FALSE,
+  dev = "svg",
+  fig.align = "center",
+  out.width = "100%",
+  fig.retina = 2
+)
+
+local({
+  pkgs <- c("dplyr", "gt", "gtsummary", "ggplot2", "stringr", "purrr", "data.table")
+  for (pkg in pkgs) require(pkg, warn.conflicts = FALSE, character.only = TRUE, quietly = TRUE)
+})
+```
+
+```{r load-data-for-poster, include=FALSE}
+source(here::here(BASE_PATH, "Scripts/03-Plots.R"))
+source(here::here(BASE_PATH, "Scripts/04-Tables.R"))
+data <- Results$Data()
+```
+
+# Background
+
+The incidence of cutaneous melanoma has increased in fair-skinned populations during the past decades [@whiteman_growing_2016]. Tumour thickness at diagnosis is an important prognostic factor and forms the basis for staging and tumour classification (T) [@gershenwald_melanoma_2017].
+
+**Aim:** Describe the trends in melanoma tumour thickness in Norway by T category, overall and in important subgroups such as sex, age, anatomic site, and histopathological subtype, over 35-year.
+
+# Data & Methods
+
+```{r}
+nobs <- nrow(data)
+```
+
+Data for all invasive melanoma cases diagnosed in 1983–2019 were obtained from the Cancer Registry of Norway (CRN). Tumour thickness is included in the Norwegian Melanoma Registry from 2008, and thickness for the cases diagnosed in 1983–2007 were extracted from CRN paper archives. In total `r format(nobs, big.mark = ',')` cases were included. The tumour thickness was categorized as T1 (≤1.0 mm), T2 (>1.0–2.0 mm), T3 (>2.0–4.0 mm), and T4 (>4.0 mm).
+
+Missing thickness, anatomic site, and histopathological subtype were imputed using multiple imputations. The European standard population was used for age standardization. For each T category, annual percentage change (APC) and average annual percentage change (AAPC) with 95% confidence intervals (CIs) were obtained using segmented regression.
+
+# Results
+
+```{r table-1, cache=TRUE}
+tbl <- Tables$SummaryTable(
+  vars = list(
+    Age = "Age at diagnosis, median",
+    # AgeGroup = "Age group, n(%)",
+    # AnatomicSite = "Anatomic site, n(%)",
+    # MelanomaType = "Histopathological subtype, n(%)",
+    Thickness = "Tumour thickness, median",
+    Tstage = "T category, n(%)"
+  ),
+  digits = list(
+    all_continuous() ~ c(0, 0),
+    all_categorical() ~ c(1, 0),
+    any_of("Thickness") ~ c(1, 1)
+  ),
+  statistic = list(
+    all_continuous() ~ "{median}",
+    all_categorical() ~ "{n}({p})"
+  )
+) %>%
+  gt::tab_options(
+    container.width = "100%",
+    table.width = "100%",
+    container.height = "100%",
+    table.font.size = "70%",
+    data_row.padding = "10px",
+    row.striping.background_color = "#fcfcfc",
+    table.font.color = "#454545"
+  ) %>%
+  gt::tab_header(
+    title = gt::md(paste0(
+      "**Table 1: Characteristics of melanoma cases<br>",
+      "in Norway before 2000 and after 2008**"
+    )),
+    subtitle = gt::md(
+      paste0("**(n = ", format(nobs, big.mark = ","), " for 1983–2019)**")
+    )
+  ) %>%
+  gt::cols_hide(c("stat_2_1", "stat_2_2"))
+tbl[["_source_notes"]][[1]] <- NULL
+tbl
+```
+
+In both men and women, the median age at diagnosis increased while the median tumour thickness decreased from 1983–1999 to 2008–2019 (Table 1). In 1983–2019, the age-standardized incidence rate of melanoma increased from 17.7 to 33.3 in women and from 12.9 to 35.2 in men. 
+
+```{r AdjRate-BySexTstage, fig.asp=0.6, fig.cap="Age-adjusted melanoma incidence rate in Norway, 1983—2019 by sex and T category. Transparent curves represent the complete case analysis and the opaque curves the imputed data."}
+Plots$Spline$BySexTstage(filter = 'Sex != "Sum"')
+```
+
+```{r}
+tbl <- TableData$AAPC$BySexTstage()
+apc_t1 <- tbl[
+  Imp == "Pooled" & Tstage == "T1", 
+  grepl("Trend|Sex", names(tbl)), with = FALSE
+]
+apc_t1[, seq(2, 8, 2) := map(.SD, ~str_replace(.x, "(.*?) \\((.*), (.*)\\)", "(\\1, \\2–\\3)")), .SDcols = seq(2, 8, 2)] 
+```
+
+Melanomas in the T1 category had the largest increase in incidence and a plateau was found for both sexes (Figure 1). The APCs (95% CIs) showed an increase in T1 melanomas until 1989 `r apc_t1[1, "Trend 1_APC"][[1]]` followed by a plateau `r apc_t1[1, "Trend 2_APC"][[1]]` and a subsequent increase in 2005–2019 `r apc_t1[1, "Trend 3_APC"][[1]]`. A similar trend was found in men with APC (95% CI) of `r apc_t1[2, "Trend 1_APC"][[1]]` in 1983–1990, `r apc_t1[2, "Trend 2_APC"][[1]]` in 1991–2003 and `r apc_t1[2, "Trend 3_APC"][[1]]` in 2004–2019. No plateau was seen for the other T categories.
+
+```{r AAPC-BySexTstage}
+sex_lbl <- tbl[Imp == "Pooled", .(n = sum(N) / unique(imp)), by = Sex] %>%
+  .[, .(label = glue::glue_data(.SD, "{Sex} (n = {n})")), by = Sex]
+
+tstage_lbl <- tbl[Imp == "Pooled", .(
+  n = round(sum(N) / unique(imp))
+), by = Tstage][, .(label = glue::glue_data(
+  .SD,
+  "{CodeMap$get_Tstage_label(Tstage)} (n = {n})"
+)), by = Tstage]
+
+tbl[Imp == "Pooled", .(Sex, Tstage, N, imp, AAPC = Overall_APC)] %>%
+  dcast.data.table(Tstage ~ Sex, value.var = "AAPC") %>%
+  .[, Tstage := tstage_lbl[Tstage == Tstage, label]] %>%
+  gt::gt(rowname_col = "Tstage") %>%
+  gt::cols_label(
+    Women = sex_lbl[Sex == "Women", label],
+    Men = sex_lbl[Sex == "Men", label]
+  ) %>%
+  gt::tab_stubhead("T category") %>%
+  gt::tab_options(
+    container.width = "100%",
+    table.width = "100%",
+    container.height = "100%",
+    table.font.size = "70%",
+    data_row.padding = "10px",
+    row.striping.background_color = "#fcfcfc",
+    table.font.color = "#454545"
+  ) %>%
+  gt::tab_header(
+    title = gt::md(paste0(
+      "**Table 2: Average annual percentage change in <br>",
+      "age-adjusted melanoma incidence rate**"
+    )),
+    subtitle = gt::md("**By sex and T category, 1983–2019**")
+  )
+```
+
+T2 melanomas increased over the whole period: AAPC (95% CI) was 2.0 (1.6–2.5) in women and 2.9 (2.5–3.3) in men (Table 2). The incidence of T3 melanomas was stable in women and slightly increased in men. T4 melanomas also slightly increased in both sexes.
+
+
+```{r AdjRate-BySexTstageSite, fig.asp=0.6, fig.width=9, eval=FALSE}
+Plots$Spline$BySexTstageSite()
+```
+
+In T1 melanomas, the highest incidence was found for the trunk in both sexes, followed by the lower limbs in women. A plateau was found during the 1990s–2000 for all sites in men and the trunk and lower limb in women.
+
+```{r AdjRate-BySexTstageType, fig.asp=0.6, fig.width=9, fig.cap="Age-adjusted melanoma incidence rate in Norway, 1983—2019 by sex, T category and histopathological sub-type. Transparent curves represent the complete case analysis and the opaque curves the imputed data."}
+Plots$Spline$BySexTstageType()
+```
+
+In superficial spreading melanomas, T1 melanomas showed a similar pattern as for T1 overall, but T2 melanomas showed an increasing trend in both sexes (Figure 2). For nodular melanomas, thicker tumours, particularly T3 melanomas, were dominating over the whole period (Figure 2).
+
+```{r LexisPlot, fig.asp=0.7, fig.width=9, fig.cap="Age-specific melanoma incidence rate by age at diagnosis and period in Norway, 1983–2019 by T category"}
+Plots$APC$LexisPlot(Group = "Tstage") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_colorbar(barwidth = unit(0.8, "npc"), barheight = unit(1, "cm")))
+```
+
+The difference in incidence rates between the youngest and oldest age-groups was larger in thicker melanomas as compared to thinner melanomas. The highest incidence rates of T1 melanomas occurred around the ages 60–80 while for T3 and T4 melanomas the highest incidence rates were seen among the oldest (80+) (Figure 3).
+
+
+# Conclusions
+
+- Distinct increase in T1 melanoma incidence found before and after a plateau may indicate the increasing awareness. Increasing trend found in thicker tumours (T2–T4), in overall, suggest a melanoma epidemic in Norway.
+
+- Higher incidence of thicker melanomas in men and increasing incidence of thicker melanomas in women demands for intervention through risk stratification.
+
+- Further studies are required to understand the reasons for the plateau in the incidence rate.
+
+**Funding:** This project is funded by the Norwegian Research Council (project no. 302048) and UNIFOR-FRIMED (2019).
+
+# Reference
